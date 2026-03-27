@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles Personalizados 💖🌻</title>
+    <style>
+        /* --- ESTILOS BASE Y FONDO --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+            color: #ffffff;
+            background-image: url('pareja.gif'); 
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        /* --- PANTALLA DE INICIO --- */
+        #pantalla-inicio {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            transition: opacity 1s ease;
+        }
+
+        #btn-inicio {
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            background-color: #ffeb3b;
+            color: #333;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 235, 59, 0.7);
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        #btn-inicio:hover { transform: scale(1.1) translateY(-5px); }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        #contenedor-principal {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: none;
+            z-index: 10;
+        }
+
+        /* --- POLAROIDS FLOTANTES --- */
+        .polaroid {
+            position: absolute;
+            background: #fff;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            width: 150px;
+            border-radius: 3px;
+            z-index: 8;
+            opacity: 0;
+            animation: flotarPolaroid 15s linear infinite;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        @keyframes flotarPolaroid {
+            0% { transform: translateY(110vh) rotate(var(--rot-start)); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(var(--rot-end)); opacity: 0; }
+        }
+
+        /* --- SELECTOR DE MÚSICA --- */
+        #selector-playlist {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 150;
+        }
+
+        .icono-musica {
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .icono-musica.activa { opacity: 1; text-shadow: 0 0 10px #ffeb3b; }
+
+        /* --- MENSAJE FLOTANTE --- */
+        #mensaje-dedicatoria {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 85%;
+            z-index: 15;
+            background-color: rgba(0,0,0,0.6);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .texto {
+            font-size: 1.5rem;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+            line-height: 1.4;
+        }
+
+        /* --- FORMULARIO DE PEDIDO WHATSAPP --- */
+        #form-whatsapp {
+            position: fixed;
+            bottom: -400px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 25px;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -5px 20px rgba(255, 235, 59, 0.3);
+            z-index: 140;
+            transition: bottom 1s ease-out;
+            text-align: center;
+        }
+
+        #form-whatsapp.mostrar { bottom: 0; }
+
+        #form-whatsapp h3 { color: #ffeb3b; margin: 0 0 15px 0; font-size: 1.2rem; }
+
+        #form-whatsapp textarea {
+            width: 100%;
+            height: 90px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ffeb3b;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-family: inherit;
+            resize: none;
+        }
+
+        #form-whatsapp button {
+            padding: 12px 25px;
+            background-color: #25D366;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* --- LLUVIA Y LUCIÉRNAGAS --- */
+        .flor { position: absolute; top: -50px; z-index: 7; animation: caer linear forwards; }
+        @keyframes caer { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+
+        .luciernaga {
+            position: absolute;
+            width: 4px; height: 4px;
+            background-color: #ffeb3b;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ffeb3b;
+            pointer-events: none;
+            animation: parpadeo 2s infinite;
+        }
+        @keyframes parpadeo { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div id="pantalla-inicio">
+        <button id="btn-inicio">Presiona aquí 💛</button>
+    </div>
+
+    <div id="contenedor-principal">
+        <div id="selector-playlist">
+            <span class="icono-musica activa" data-cancion="1">💖</span>
+            <span class="icono-musica" data-cancion="2">🎵</span>
+            <span class="icono-musica" data-cancion="3">🌻</span>
+        </div>
+
+        <div id="mensaje-dedicatoria">
+            <h1 class="texto" id="escritura"></h1>
+        </div>
+
+        <div id="form-whatsapp">
+            <h3>¡Pídeme tu detalle personalizado! 💌</h3>
+            <textarea id="respuesta-texto" placeholder="Cuéntame tu idea aquí..."></textarea>
+            <button id="btn-enviar-wa">Enviar a WhatsApp</button>
+        </div>
+
+        <audio id="musica-1" loop><source src="crecer.mp3" type="audio/mpeg"></audio>
+        <audio id="musica-2" loop><source src="juegas.mp3" type="audio/mpeg"></audio>
+        <audio id="musica-3" loop><source src="amor.mp3" type="audio/mpeg"></audio>
+    </div>
+
+    <script>
+        const mensajeDedicatoria = "Unas flores amarillas y algunos de nuestros momentos... Gracias por existir. ✨💛";
+        const numeroWhatsApp = "524493377942"; // Tu número corregido para el enlace
+
+        const btnInicio = document.getElementById('btn-inicio');
+        const pantallaInicio = document.getElementById('pantalla-inicio');
+        const contenedorPrincipal = document.getElementById('contenedor-principal');
+        const textoEscritura = document.getElementById('escritura');
+        const formWhatsApp = document.getElementById('form-whatsapp');
+        let musicaActiva = null;
+
+        btnInicio.addEventListener('click', () => {
+            pantallaInicio.style.opacity = '0';
+            setTimeout(() => {
+                pantallaInicio.style.display = 'none';
+                contenedorPrincipal.style.display = 'block';
+                iniciarEfectoEscritura();
+                setInterval(crearFlor, 400);
+                setInterval(crearPolaroid, 4000);
+                reproducirCancion(1);
+                for(let i=0; i<25; i++) crearLuciernaga();
+                setTimeout(() => formWhatsApp.classList.add('mostrar'), 15000);
+            }, 1000);
+        });
+
+        function iniciarEfectoEscritura() {
+            let i = 0;
+            function escribir() {
+                if (i < mensajeDedicatoria.length) {
+                    textoEscritura.innerHTML += mensajeDedicatoria.charAt(i);
+                    i++; setTimeout(escribir, 80);
+                }
+            }
+            escribir();
+        }
+
+        function crearFlor() {
+            const flores = ['🌻', '🌼', '✨', '💛'];
+            const f = document.createElement('div');
+            f.className = 'flor';
+            f.innerText = flores[Math.floor(Math.random()*flores.length)];
+            f.style.left = Math.random()*100 + "vw";
+            f.style.fontSize = Math.random()*20+20+"px";
+            const d = Math.random()*3+4;
+            f.style.animationDuration = d+"s";
+            contenedorPrincipal.appendChild(f);
+            setTimeout(() => f.remove(), d*1000);
+        }
+
+        function crearPolaroid() {
+            const fotos = ['corazon.jpg', 'DIJE.jpg', 'text.jpg'];
+            const p = document.createElement('div');
+            p.className = 'polaroid';
+            const img = document.createElement('img');
+            img.src = fotos[Math.floor(Math.random()*fotos.length)];
+            p.appendChild(img);
+            p.style.left = Math.random()*70+10+"vw";
+            p.style.setProperty('--rot-start', (Math.random()*40-20)+"deg");
+            p.style.setProperty('--rot-end', (Math.random()*40-20)+"deg");
+            contenedorPrincipal.appendChild(p);
+            setTimeout(() => p.remove(), 15000);
+        }
+
+        function reproducirCancion(id) {
+            if(musicaActiva) { musicaActiva.pause(); musicaActiva.currentTime = 0; }
+            musicaActiva = document.getElementById('musica-'+id);
+            musicaActiva.play();
+        }
+
+        document.querySelectorAll('.icono-musica').forEach(icon => {
+            icon.onclick = function() {
+                document.querySelectorAll('.icono-musica').forEach(i => i.classList.remove('activa'));
+                this.classList.add('activa');
+                reproducirCancion(this.dataset.cancion);
+            }
+        });
+
+        document.getElementById('btn-enviar-wa').onclick = () => {
+            const val = document.getElementById('respuesta-texto').value;
+            if(!val) return alert("Escribe tu idea primero 🥺");
+            const msj = encodeURIComponent(`¡Hola! Vi tu página y quiero un detalle personalizado.\nMi idea es:\n"${val}"`);
+            window.open(`https://wa.me/${numeroWhatsApp}?text=${msj}`, '_blank');
+        };
+
+        function crearLuciernaga() {
+            const l = document.createElement('div');
+            l.className = 'luciernaga';
+            l.style.left = Math.random()*100+"vw";
+            l.style.top = Math.random()*100+"vh";
+            l.style.animationDelay = Math.random()*5+"s";
+            contenedorPrincipal.appendChild(l);
+        }
+    </script>
+</body>
+</html>
